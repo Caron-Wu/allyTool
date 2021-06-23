@@ -1,0 +1,34 @@
+//select tool
+//Character Base all
+global proc ally_ch_select(){
+
+//joint name listb
+string $UniJoint[]={"hips1","spine","spine1","neck","head",
+"leftShoulder_Dummy","leftShoulder","leftArm","leftArmRoll","leftForearm","leftForearmRoll","leftHand",
+"rightShoulder_Dummy","rightShoulder","rightArm","rightArmRoll","rightForearm","rightForearmRoll","rightHand",
+"leftUpLeg","leftLeg","leftFoot","leftFootIndex1",
+"rightUpLeg","rightLeg","rightFoot","rightFootIndex1",
+"leftHandThumb1","leftHandThumb2","leftHandThumb3",
+"leftHandIndex1","leftHandIndex2","leftHandIndex3",
+"leftHandMiddle1","leftHandMiddle2","leftHandMiddle3",
+"leftHandRing1","leftHandRing2","leftHandRing3",
+"leftHandPinky1","leftHandPinky2","leftHandPinky3",
+"rightHandThumb1","rightHandThumb2","rightHandThumb3",
+"rightHandIndex1","rightHandIndex2","rightHandIndex3",
+"rightHandMiddle1","rightHandMiddle2","rightHandMiddle3",
+"rightHandRing1","rightHandRing2","rightHandRing3",
+"rightHandPinky1","rightHandPinky2","rightHandPinky3"};
+
+//chosen part of Character
+string $sels[] = `ls -sl`;
+string $buffer[];
+tokenize $sels[0] ":" $buffer;
+
+//chosed joint
+select -cl;
+for($i=0;$i<size($UniJoint);$i++){
+    if(`objExists ($buffer[0]+":"+$UniJoint[$i])`){select -add ($buffer[0]+":"+$UniJoint[$i]);}
+    else if(`objExists $UniJoint[$i]`){select -add $UniJoint[$i];}
+}
+}
+ally_ch_select();
